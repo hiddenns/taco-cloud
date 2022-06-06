@@ -3,6 +3,7 @@ package sia.tacocloud.repository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import sia.tacocloud.Order;
@@ -33,7 +34,7 @@ public class JdbcOrderRepository implements OrderRepository {
     }
 // end::core[]
 
-    // tag::save[]
+
     @Override
     public Order save(Order order) {
         order.setPlacedAt(new Date());
@@ -51,6 +52,19 @@ public class JdbcOrderRepository implements OrderRepository {
         @SuppressWarnings("unchecked")
         Map<String, Object> values =
                 objectMapper.convertValue(order, Map.class);
+
+//        MapSqlParameterSource values = new MapSqlParameterSource()
+//                .addValue("deliverName", order.getName())
+//                .addValue("deliverStreet", order.getStreet())
+//                .addValue("deliverCity", order.getCity())
+//                .addValue("deliverState", order.getState())
+//                .addValue("deliverZip", order.getZip())
+//                .addValue("ccNumber", order.getCcNumber())
+//                .addValue("ccExpiration", order.getCcExpiration())
+//                .addValue("ccCVV", order.getCcCVV())
+//                .addValue("placedAt", order.getPlacedAt());
+
+
         values.put("placedAt", order.getPlacedAt());
 
         long orderId =
@@ -66,4 +80,5 @@ public class JdbcOrderRepository implements OrderRepository {
         values.put("taco", taco.getId());
         orderTacoInserter.execute(values);
     }
+
 }

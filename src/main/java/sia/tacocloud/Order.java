@@ -19,19 +19,19 @@ public class Order {
     private Date placedAt;
 
     @NotBlank(message = "Name is required")
-    private String name;
+    private String deliverName;
 
     @NotBlank(message = "Street is required")
-    private String street;
+    private String deliverStreet;
 
     @NotBlank(message = "City is required")
-    private String city;
+    private String deliverCity;
 
     @NotBlank(message = "State is required")
-    private String state;
+    private String deliverState;
 
     @NotBlank(message = "Zip code is required")
-    private String zip;
+    private String deliverZip;
 
     @CreditCardNumber(message = "Not a valid credit card number")
     private String ccNumber;
