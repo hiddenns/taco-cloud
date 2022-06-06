@@ -13,7 +13,7 @@
 <img th:src="@{/img/TacoCloud2.png}"/>
 <br/>
 
-<form method="post" th:object="${design}">
+<form method="post" th:object="${taco}">
 
     <div th:if="${#fields.hasErrors()}">
         <span class="validationError"
